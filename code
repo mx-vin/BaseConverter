@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+
+    public class Main {
+
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Enter number:");
+            long decimal = scanner.nextLong(); // Use long to accommodate larger numbers
+
+            if (decimal < 0) {
+                System.out.println("The decimal number cannot be negative.");
+                return;
+            }
+
+            System.out.println("Enter the base value between 2 and 16:");
+            int base = scanner.nextInt();
+
+            if (base < 2 || base > 16) {
+                System.out.println("The base value must be between 2 and 16.");
+                return;
+            }
+
+            String convertedValue = convertToBase(decimal, base);
+            System.out.println("The equivalent base-" + base + " value of decimal " + decimal + " is: " + convertedValue);
+        }
+
+        private static String convertToBase(long decimal, int base) {
+            StringBuilder result = new StringBuilder();
+            char[] baseDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+            do {
+                int digit = (int)(decimal % base);
+                result.insert(0, baseDigits[digit]);
+                decimal /= base;
+            } while (decimal > 0);
+
+            return result.toString();
+        }
+    }
